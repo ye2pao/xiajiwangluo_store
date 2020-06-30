@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiajiwangluo.dao.SupplierMapper" >
+  <resultMap id="BaseResultMap" type="com.xiajiwangluo.bean.Supplier" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cls" property="cls" jdbcType="INTEGER" />
+    <result column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="yewuTel" property="yewutel" jdbcType="VARCHAR" />
+    <result column="yewuName" property="yewuname" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="norms" property="norms" jdbcType="VARCHAR" />
+    <result column="jyPrice" property="jyprice" jdbcType="DOUBLE" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="qiyeName" property="qiyename" jdbcType="VARCHAR" />
+    <result column="qiyeTel" property="qiyetel" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="VARCHAR" />
+    <result column="y" property="y" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="sName" property="sname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, cls, title, photo, yewuTel, yewuName, brand, price, norms, jyPrice, url, qiyeName, 
+    qiyeTel, x, y, addr, sName,sid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.SupplierExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from supplier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from supplier
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiajiwangluo.bean.SupplierExample" >
+    delete from supplier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiajiwangluo.bean.Supplier" >
+    insert into supplier (cls, title,
+      photo, yewuTel, yewuName, 
+      brand, price, norms, 
+      jyPrice, url, qiyeName, 
+      qiyeTel, x, y, addr, 
+      sName,sid)
+    values (#{cls,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+      #{photo,jdbcType=VARCHAR}, #{yewutel,jdbcType=VARCHAR}, #{yewuname,jdbcType=VARCHAR}, 
+      #{brand,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{norms,jdbcType=VARCHAR}, 
+      #{jyprice,jdbcType=DOUBLE}, #{url,jdbcType=VARCHAR}, #{qiyename,jdbcType=VARCHAR}, 
+      #{qiyetel,jdbcType=VARCHAR}, #{x,jdbcType=VARCHAR}, #{y,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
+      #{sname,jdbcType=VARCHAR},#{sid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiajiwangluo.bean.Supplier" >
+    insert into supplier
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="cls != null" >
+        cls,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="yewutel != null" >
+        yewuTel,
+      </if>
+      <if test="yewuname != null" >
+        yewuName,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="norms != null" >
+        norms,
+      </if>
+      <if test="jyprice != null" >
+        jyPrice,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="qiyename != null" >
+        qiyeName,
+      </if>
+      <if test="qiyetel != null" >
+        qiyeTel,
+      </if>
+      <if test="x != null" >
+        x,
+      </if>
+      <if test="y != null" >
+        y,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="sname != null" >
+        sName,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="cls != null" >
+        #{cls,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="yewutel != null" >
+        #{yewutel,jdbcType=VARCHAR},
+      </if>
+      <if test="yewuname != null" >
+        #{yewuname,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="norms != null" >
+        #{norms,jdbcType=VARCHAR},
+      </if>
+      <if test="jyprice != null" >
+        #{jyprice,jdbcType=DOUBLE},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="qiyename != null" >
+        #{qiyename,jdbcType=VARCHAR},
+      </if>
+      <if test="qiyetel != null" >
+        #{qiyetel,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiajiwangluo.bean.SupplierExample" resultType="java.lang.Integer" >
+    select count(*) from supplier
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update supplier
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.sid != null" >
+        id = #{record.sid,jdbcType=INTEGER},
+      </if>
+      <if test="record.cls != null" >
+        cls = #{record.cls,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photo != null" >
+        photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yewutel != null" >
+        yewuTel = #{record.yewutel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.yewuname != null" >
+        yewuName = #{record.yewuname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.norms != null" >
+        norms = #{record.norms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jyprice != null" >
+        jyPrice = #{record.jyprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qiyename != null" >
+        qiyeName = #{record.qiyename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qiyetel != null" >
+        qiyeTel = #{record.qiyetel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.x != null" >
+        x = #{record.x,jdbcType=VARCHAR},
+      </if>
+      <if test="record.y != null" >
+        y = #{record.y,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addr != null" >
+        addr = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sname != null" >
+        sName = #{record.sname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update supplier
+    set id = #{record.id,jdbcType=INTEGER},
+      sid = #{record.sid,jdbcType=INTEGER},
+      cls = #{record.cls,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      yewuTel = #{record.yewutel,jdbcType=VARCHAR},
+      yewuName = #{record.yewuname,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DOUBLE},
+      norms = #{record.norms,jdbcType=VARCHAR},
+      jyPrice = #{record.jyprice,jdbcType=DOUBLE},
+      url = #{record.url,jdbcType=VARCHAR},
+      qiyeName = #{record.qiyename,jdbcType=VARCHAR},
+      qiyeTel = #{record.qiyetel,jdbcType=VARCHAR},
+      x = #{record.x,jdbcType=VARCHAR},
+      y = #{record.y,jdbcType=VARCHAR},
+      addr = #{record.addr,jdbcType=VARCHAR},
+      sName = #{record.sname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiajiwangluo.bean.Supplier" >
+    update supplier
+    <set >
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="cls != null" >
+        cls = #{cls,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="yewutel != null" >
+        yewuTel = #{yewutel,jdbcType=VARCHAR},
+      </if>
+      <if test="yewuname != null" >
+        yewuName = #{yewuname,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="norms != null" >
+        norms = #{norms,jdbcType=VARCHAR},
+      </if>
+      <if test="jyprice != null" >
+        jyPrice = #{jyprice,jdbcType=DOUBLE},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="qiyename != null" >
+        qiyeName = #{qiyename,jdbcType=VARCHAR},
+      </if>
+      <if test="qiyetel != null" >
+        qiyeTel = #{qiyetel,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        x = #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        y = #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        sName = #{sname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiajiwangluo.bean.Supplier" >
+    update supplier
+    set cls = #{cls,jdbcType=INTEGER},
+     sid = #{sid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      photo = #{photo,jdbcType=VARCHAR},
+      yewuTel = #{yewutel,jdbcType=VARCHAR},
+      yewuName = #{yewuname,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      norms = #{norms,jdbcType=VARCHAR},
+      jyPrice = #{jyprice,jdbcType=DOUBLE},
+      url = #{url,jdbcType=VARCHAR},
+      qiyeName = #{qiyename,jdbcType=VARCHAR},
+      qiyeTel = #{qiyetel,jdbcType=VARCHAR},
+      x = #{x,jdbcType=VARCHAR},
+      y = #{y,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      sName = #{sname,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

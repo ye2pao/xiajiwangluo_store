@@ -1,0 +1,47 @@
+[
+  {
+    "type": 0,
+    "title": {
+      "供应商名称": "sname",
+      "企业联系人": "qiyename",
+      "企业电话": "qiyetel",
+      "业务联系人": "yewuname",
+      "业务电话": "yewutel",
+      "经营品牌": "brand",
+      "地址": "addr"
+    },
+    "data": {
+      "id":1,
+      "sname": "",
+      "qiyename": "",
+      "qiyetel": "",
+      "yewuname": "",
+      "yewutel": "",
+      "brand": "",
+      "addr": ""
+    }
+  },
+  {
+    "type": 1,
+    "title": {
+      "商品名称": "title",
+      "条形码": "url",
+      "数量": "num",
+      "规格": "norms",
+      "进价": "price",
+      "有效期": "xiaoqi",
+      "供应商": "sname"
+    },
+    "data": {
+      "id":0,
+      "title": "商品名称",
+      "url": "url",
+      "num": "num",
+      "norms": "norms",
+      "price": "price",
+      "xiaoqi": "xiaoqi",
+      "sname": "sname"
+    }
+  }
+
+]

@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiajiwangluo.dao.DepotMapper" >
+  <resultMap id="BaseResultMap" type="com.xiajiwangluo.bean.Depot" >
+    <id column="sid" property="sid" jdbcType="VARCHAR" />
+    <id column="url" property="url" jdbcType="VARCHAR" />
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="xiaoqi" property="xiaoqi" jdbcType="DATE" />
+    <result column="norms" property="norms" jdbcType="VARCHAR" />
+    <result column="purchase" property="purchase" jdbcType="DOUBLE" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="num" property="num" jdbcType="DOUBLE" />
+    <result column="tejia" property="tejia" jdbcType="DOUBLE" />
+    <result column="hdbegin" property="hdbegin" jdbcType="DATE" />
+    <result column="hdend" property="hdend" jdbcType="DATE" />
+    <result column="hdnames" property="hdnames" jdbcType="VARCHAR" />
+    <result column="cls" property="cls" jdbcType="VARCHAR" />
+    <result column="sname" property="sname" jdbcType="VARCHAR" />
+    <result column="danwei" property="danwei" jdbcType="VARCHAR" />
+    <result column="ruku" property="ruku" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    sid, url, id, title, brand, xiaoqi, norms, purchase, price, num, tejia, hdbegin,
+    hdend, hdnames, cls, sname, danwei, ruku
+  </sql>
+  <sql id="Base_Column_List2" >
+    sid, url, title, norms, purchase, price, tejia, hdbegin,
+    hdend, hdnames, cls,danwei
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.DepotExample" >
+    select
+    <if test="distinct" >
+      distinct
+      <include refid="Base_Column_List2" />
+    </if>
+    <if test="!distinct">
+      <include refid="Base_Column_List"/>
+    </if>
+    from depot
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.DepotKey" >
+    select
+    <include refid="Base_Column_List" />
+    from depot
+    where sid = #{sid,jdbcType=VARCHAR}
+      and url = #{url,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.xiajiwangluo.bean.DepotKey" >
+    delete from depot
+    where sid = #{sid,jdbcType=VARCHAR}
+      and url = #{url,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiajiwangluo.bean.DepotExample" >
+    delete from depot
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiajiwangluo.bean.Depot" >
+    insert into depot (sid, url, id,
+      title, brand, xiaoqi,
+      norms, purchase, price,
+      num, tejia, hdbegin, hdend,
+      hdnames, cls, sname,
+      danwei, ruku)
+    values (#{sid,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{id,jdbcType=INTEGER},
+      #{title,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{xiaoqi,jdbcType=DATE},
+      #{norms,jdbcType=VARCHAR}, #{purchase,jdbcType=DOUBLE}, #{price,jdbcType=DOUBLE},
+      #{num,jdbcType=DOUBLE}, #{tejia,jdbcType=DOUBLE}, #{hdbegin,jdbcType=DATE}, #{hdend,jdbcType=DATE},
+      #{hdnames,jdbcType=VARCHAR}, #{cls,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR},
+      #{danwei,jdbcType=VARCHAR}, #{ruku,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiajiwangluo.bean.Depot" >
+    insert into depot
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="xiaoqi != null" >
+        xiaoqi,
+      </if>
+      <if test="norms != null" >
+        norms,
+      </if>
+      <if test="purchase != null" >
+        purchase,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="tejia != null" >
+        tejia,
+      </if>
+      <if test="hdbegin != null" >
+        hdbegin,
+      </if>
+      <if test="hdend != null" >
+        hdend,
+      </if>
+      <if test="hdnames != null" >
+        hdnames,
+      </if>
+      <if test="cls != null" >
+        cls,
+      </if>
+      <if test="sname != null" >
+        sname,
+      </if>
+      <if test="danwei != null" >
+        danwei,
+      </if>
+      <if test="ruku != null" >
+        ruku,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoqi != null" >
+        #{xiaoqi,jdbcType=DATE},
+      </if>
+      <if test="norms != null" >
+        #{norms,jdbcType=VARCHAR},
+      </if>
+      <if test="purchase != null" >
+        #{purchase,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="tejia != null" >
+        #{tejia,jdbcType=DOUBLE},
+      </if>
+      <if test="hdbegin != null" >
+        #{hdbegin,jdbcType=DATE},
+      </if>
+      <if test="hdend != null" >
+        #{hdend,jdbcType=DATE},
+      </if>
+      <if test="hdnames != null" >
+        #{hdnames,jdbcType=VARCHAR},
+      </if>
+      <if test="cls != null" >
+        #{cls,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="danwei != null" >
+        #{danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="ruku != null" >
+        #{ruku,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiajiwangluo.bean.DepotExample" resultType="java.lang.Integer" >
+    select count(*) from depot
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update depot
+    <set >
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null" >
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.brand != null" >
+        brand = #{record.brand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.xiaoqi != null" >
+        xiaoqi = #{record.xiaoqi,jdbcType=DATE},
+      </if>
+      <if test="record.norms != null" >
+        norms = #{record.norms,jdbcType=VARCHAR},
+      </if>
+      <if test="record.purchase != null" >
+        purchase = #{record.purchase,jdbcType=DOUBLE},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DOUBLE},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=DOUBLE},
+      </if>
+      <if test="record.tejia != null" >
+        tejia = #{record.tejia,jdbcType=DOUBLE},
+      </if>
+      <if test="record.hdbegin != null" >
+        hdbegin = #{record.hdbegin,jdbcType=DATE},
+      </if>
+      <if test="record.hdend != null" >
+        hdend = #{record.hdend,jdbcType=DATE},
+      </if>
+      <if test="record.hdnames != null" >
+        hdnames = #{record.hdnames,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cls != null" >
+        cls = #{record.cls,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sname != null" >
+        sname = #{record.sname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.danwei != null" >
+        danwei = #{record.danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruku != null" >
+        ruku = #{record.ruku,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update depot
+    set sid = #{record.sid,jdbcType=VARCHAR},
+      url = #{record.url,jdbcType=VARCHAR},
+      id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      brand = #{record.brand,jdbcType=VARCHAR},
+      xiaoqi = #{record.xiaoqi,jdbcType=DATE},
+      norms = #{record.norms,jdbcType=VARCHAR},
+      purchase = #{record.purchase,jdbcType=DOUBLE},
+      price = #{record.price,jdbcType=DOUBLE},
+      num = #{record.num,jdbcType=DOUBLE},
+      tejia = #{record.tejia,jdbcType=DOUBLE},
+      hdbegin = #{record.hdbegin,jdbcType=DATE},
+      hdend = #{record.hdend,jdbcType=DATE},
+      hdnames = #{record.hdnames,jdbcType=VARCHAR},
+      cls = #{record.cls,jdbcType=VARCHAR},
+      sname = #{record.sname,jdbcType=VARCHAR},
+      danwei = #{record.danwei,jdbcType=VARCHAR},
+      ruku = #{record.ruku,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiajiwangluo.bean.Depot" >
+    update depot
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="xiaoqi != null" >
+        xiaoqi = #{xiaoqi,jdbcType=DATE},
+      </if>
+      <if test="norms != null" >
+        norms = #{norms,jdbcType=VARCHAR},
+      </if>
+      <if test="purchase != null" >
+        purchase = #{purchase,jdbcType=DOUBLE},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=DOUBLE},
+      </if>
+      <if test="tejia != null" >
+        tejia = #{tejia,jdbcType=DOUBLE},
+      </if>
+      <if test="hdbegin != null" >
+        hdbegin = #{hdbegin,jdbcType=DATE},
+      </if>
+      <if test="hdend != null" >
+        hdend = #{hdend,jdbcType=DATE},
+      </if>
+      <if test="hdnames != null" >
+        hdnames = #{hdnames,jdbcType=VARCHAR},
+      </if>
+      <if test="cls != null" >
+        cls = #{cls,jdbcType=VARCHAR},
+      </if>
+      <if test="sname != null" >
+        sname = #{sname,jdbcType=VARCHAR},
+      </if>
+      <if test="danwei != null" >
+        danwei = #{danwei,jdbcType=VARCHAR},
+      </if>
+      <if test="ruku != null" >
+        ruku = #{ruku,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=VARCHAR}
+      and url = #{url,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiajiwangluo.bean.Depot" >
+    update depot
+    set title = #{title,jdbcType=VARCHAR},
+      brand = #{brand,jdbcType=VARCHAR},
+      xiaoqi = #{xiaoqi,jdbcType=DATE},
+      norms = #{norms,jdbcType=VARCHAR},
+      purchase = #{purchase,jdbcType=DOUBLE},
+      price = #{price,jdbcType=DOUBLE},
+      num = #{num,jdbcType=DOUBLE},
+      tejia = #{tejia,jdbcType=DOUBLE},
+      hdbegin = #{hdbegin,jdbcType=DATE},
+      hdend = #{hdend,jdbcType=DATE},
+      hdnames = #{hdnames,jdbcType=VARCHAR},
+      cls = #{cls,jdbcType=VARCHAR},
+      sname = #{sname,jdbcType=VARCHAR},
+      danwei = #{danwei,jdbcType=VARCHAR},
+      ruku = #{ruku,jdbcType=TIMESTAMP}
+    where sid = #{sid,jdbcType=VARCHAR}
+      and url = #{url,jdbcType=VARCHAR}
+      and id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectZhixiao" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.DepotExample" >
+    select
+    sid, url, id, title,MIN(xiaoqi) AS xiaoqi, norms, purchase, price, sum(num) AS num ,
+    cls, danwei, max(ruku) ruku,sname
+    from depot
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    GROUP BY url order by ruku
+  </select>
+</mapper>

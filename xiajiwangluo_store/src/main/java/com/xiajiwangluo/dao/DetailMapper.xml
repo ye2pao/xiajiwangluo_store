@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiajiwangluo.dao.DetailMapper" >
+	<resultMap id="BaseResultMap" type="com.xiajiwangluo.bean.Detail" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="sid" property="sid" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="ssum" property="sum" jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="DOUBLE" />
+		<result column="shoujia" property="shoujia" jdbcType="DOUBLE" />
+		<result column="jinjia" property="jinjia" jdbcType="DOUBLE" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="danhao" property="danhao" jdbcType="TIMESTAMP" />
+		<result column="cls" property="cls" jdbcType="INTEGER" />
+		<result column="payMode" property="paymode" jdbcType="INTEGER" />
+		<result column="tuihuo" property="tuihuo" jdbcType="INTEGER" />
+		<result column="profit" property="profit" jdbcType="DOUBLE" />
+		<result column="norms" property="norms" jdbcType="VARCHAR" />
+		<result column="danwei" property="danwei" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause" >
+		<where >
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause" >
+		<where >
+			<foreach collection="example.oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue" >
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue" >
+									and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List" >
+		id, sid, title, num, shoujia, jinjia, url, danhao, cls, payMode, tuihuo, profit,
+		norms, danwei
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.DetailExample" >
+		select
+		<if test="distinct" >
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from detail
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByDistincts" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.DetailExample" >
+		select
+		<include refid="Base_Column_List" />
+		from detail
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+		GROUP BY url
+	</select>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+		select
+		<include refid="Base_Column_List" />
+		from detail
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+		delete from detail
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.xiajiwangluo.bean.DetailExample" >
+		delete from detail
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.xiajiwangluo.bean.Detail" >
+		insert into detail (id, sid, title,
+		num, shoujia, jinjia,
+		url, danhao, cls,
+		payMode, tuihuo, profit,
+		norms, danwei)
+		values (#{id,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+		#{num,jdbcType=DOUBLE}, #{shoujia,jdbcType=DOUBLE}, #{jinjia,jdbcType=DOUBLE},
+		#{url,jdbcType=VARCHAR}, #{danhao,jdbcType=TIMESTAMP}, #{cls,jdbcType=INTEGER},
+		#{paymode,jdbcType=INTEGER}, #{tuihuo,jdbcType=INTEGER}, #{profit,jdbcType=DOUBLE},
+		#{norms,jdbcType=VARCHAR}, #{danwei,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.xiajiwangluo.bean.Detail" >
+		insert into detail
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				id,
+			</if>
+			<if test="sid != null" >
+				sid,
+			</if>
+			<if test="title != null" >
+				title,
+			</if>
+			<if test="num != null" >
+				num,
+			</if>
+			<if test="shoujia != null" >
+				shoujia,
+			</if>
+			<if test="jinjia != null" >
+				jinjia,
+			</if>
+			<if test="url != null" >
+				url,
+			</if>
+			<if test="danhao != null" >
+				danhao,
+			</if>
+			<if test="cls != null" >
+				cls,
+			</if>
+			<if test="paymode != null" >
+				payMode,
+			</if>
+			<if test="tuihuo != null" >
+				tuihuo,
+			</if>
+			<if test="profit != null" >
+				profit,
+			</if>
+			<if test="norms != null" >
+				norms,
+			</if>
+			<if test="danwei != null" >
+				danwei,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="sid != null" >
+				#{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null" >
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null" >
+				#{num,jdbcType=DOUBLE},
+			</if>
+			<if test="shoujia != null" >
+				#{shoujia,jdbcType=DOUBLE},
+			</if>
+			<if test="jinjia != null" >
+				#{jinjia,jdbcType=DOUBLE},
+			</if>
+			<if test="url != null" >
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="danhao != null" >
+				#{danhao,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cls != null" >
+				#{cls,jdbcType=INTEGER},
+			</if>
+			<if test="paymode != null" >
+				#{paymode,jdbcType=INTEGER},
+			</if>
+			<if test="tuihuo != null" >
+				#{tuihuo,jdbcType=INTEGER},
+			</if>
+			<if test="profit != null" >
+				#{profit,jdbcType=DOUBLE},
+			</if>
+			<if test="norms != null" >
+				#{norms,jdbcType=VARCHAR},
+			</if>
+			<if test="danwei != null" >
+				#{danwei,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.xiajiwangluo.bean.DetailExample" resultType="java.lang.Integer" >
+		select count(*) from detail
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map" >
+		update detail
+		<set >
+			<if test="record.id != null" >
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.sid != null" >
+				sid = #{record.sid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.title != null" >
+				title = #{record.title,jdbcType=VARCHAR},
+			</if>
+			<if test="record.num != null" >
+				num = #{record.num,jdbcType=DOUBLE},
+			</if>
+			<if test="record.shoujia != null" >
+				shoujia = #{record.shoujia,jdbcType=DOUBLE},
+			</if>
+			<if test="record.jinjia != null" >
+				jinjia = #{record.jinjia,jdbcType=DOUBLE},
+			</if>
+			<if test="record.url != null" >
+				url = #{record.url,jdbcType=VARCHAR},
+			</if>
+			<if test="record.danhao != null" >
+				danhao = #{record.danhao,jdbcType=TIMESTAMP},
+			</if>
+			<if test="record.cls != null" >
+				cls = #{record.cls,jdbcType=INTEGER},
+			</if>
+			<if test="record.paymode != null" >
+				payMode = #{record.paymode,jdbcType=INTEGER},
+			</if>
+			<if test="record.tuihuo != null" >
+				tuihuo = #{record.tuihuo,jdbcType=INTEGER},
+			</if>
+			<if test="record.profit != null" >
+				profit = #{record.profit,jdbcType=DOUBLE},
+			</if>
+			<if test="record.norms != null" >
+				norms = #{record.norms,jdbcType=VARCHAR},
+			</if>
+			<if test="record.danwei != null" >
+				danwei = #{record.danwei,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null" >
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map" >
+		update detail
+		set id = #{record.id,jdbcType=INTEGER},
+		sid = #{record.sid,jdbcType=VARCHAR},
+		title = #{record.title,jdbcType=VARCHAR},
+		num = #{record.num,jdbcType=DOUBLE},
+		shoujia = #{record.shoujia,jdbcType=DOUBLE},
+		jinjia = #{record.jinjia,jdbcType=DOUBLE},
+		url = #{record.url,jdbcType=VARCHAR},
+		danhao = #{record.danhao,jdbcType=TIMESTAMP},
+		cls = #{record.cls,jdbcType=INTEGER},
+		payMode = #{record.paymode,jdbcType=INTEGER},
+		tuihuo = #{record.tuihuo,jdbcType=INTEGER},
+		profit = #{record.profit,jdbcType=DOUBLE},
+		norms = #{record.norms,jdbcType=VARCHAR},
+		danwei = #{record.danwei,jdbcType=VARCHAR}
+		<if test="_parameter != null" >
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiajiwangluo.bean.Detail" >
+		update detail
+		<set >
+			<if test="sid != null" >
+				sid = #{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null" >
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null" >
+				num = #{num,jdbcType=DOUBLE},
+			</if>
+			<if test="shoujia != null" >
+				shoujia = #{shoujia,jdbcType=DOUBLE},
+			</if>
+			<if test="jinjia != null" >
+				jinjia = #{jinjia,jdbcType=DOUBLE},
+			</if>
+			<if test="url != null" >
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="danhao != null" >
+				danhao = #{danhao,jdbcType=TIMESTAMP},
+			</if>
+			<if test="cls != null" >
+				cls = #{cls,jdbcType=INTEGER},
+			</if>
+			<if test="paymode != null" >
+				payMode = #{paymode,jdbcType=INTEGER},
+			</if>
+			<if test="tuihuo != null" >
+				tuihuo = #{tuihuo,jdbcType=INTEGER},
+			</if>
+			<if test="profit != null" >
+				profit = #{profit,jdbcType=DOUBLE},
+			</if>
+			<if test="norms != null" >
+				norms = #{norms,jdbcType=VARCHAR},
+			</if>
+			<if test="danwei != null" >
+				danwei = #{danwei,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xiajiwangluo.bean.Detail" >
+		update detail
+		set sid = #{sid,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		num = #{num,jdbcType=DOUBLE},
+		shoujia = #{shoujia,jdbcType=DOUBLE},
+		jinjia = #{jinjia,jdbcType=DOUBLE},
+		url = #{url,jdbcType=VARCHAR},
+		danhao = #{danhao,jdbcType=TIMESTAMP},
+		cls = #{cls,jdbcType=INTEGER},
+		payMode = #{paymode,jdbcType=INTEGER},
+		tuihuo = #{tuihuo,jdbcType=INTEGER},
+		profit = #{profit,jdbcType=DOUBLE},
+		norms = #{norms,jdbcType=VARCHAR},
+		danwei = #{danwei,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectNum1" resultMap="BaseResultMap">
+		SELECT * ,SUM(num) AS ssum FROM
+		detail WHERE id IN (SELECT id FROM
+		detail WHERE sid = #{sid} AND danhao >
+		#{data}) GROUP BY url ORDER BY ssum
+		DESC
+		LIMIT 0, 10;
+	</select>
+	<select id="selectPrice1" resultMap="BaseResultMap">
+		SELECT * ,SUM(shoujia*num) AS
+		ssum FROM detail WHERE id IN (SELECT id FROM
+		detail WHERE sid = #{sid}
+		AND danhao > #{data}) GROUP BY url ORDER BY ssum
+		DESC
+		LIMIT 0, 10;
+	</select>
+	<select id="selectProfit1" resultMap="BaseResultMap">
+		SELECT * ,SUM(profit) AS
+		ssum FROM detail WHERE id IN (SELECT id FROM
+		detail WHERE sid = #{sid}
+		AND danhao > #{data}) GROUP BY url ORDER BY ssum
+		DESC
+		LIMIT 0, 10;
+	</select>
+
+	<select id="selectNum" resultMap="BaseResultMap">
+		SELECT *
+		,SUM(num) AS ssum FROM
+		detail WHERE id IN (SELECT id FROM detail WHERE
+		sid = #{sid} AND danhao >
+		#{data}) GROUP BY url ORDER BY ssum
+		LIMIT 0, 10;
+	</select>
+	<select id="selectPrice" resultMap="BaseResultMap">
+		SELECT *
+		,SUM(shoujia*num) AS
+		ssum FROM detail WHERE id IN (SELECT id FROM detail
+		WHERE sid = #{sid}
+		AND danhao > #{data}) GROUP BY url ORDER BY ssum
+		LIMIT 0,10;
+	</select>
+	<select id="selectProfit" resultMap="BaseResultMap">
+		SELECT *
+		,SUM(profit) AS ssum
+		FROM detail WHERE id IN (SELECT id FROM detail
+		WHERE sid = #{sid}
+		AND danhao > #{data}) GROUP BY url ORDER BY ssum
+		LIMIT 0,10;
+	</select>
+
+</mapper>

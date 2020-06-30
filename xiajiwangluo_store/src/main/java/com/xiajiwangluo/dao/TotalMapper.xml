@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiajiwangluo.dao.TotalMapper">
+	<resultMap id="BaseResultMap" type="com.xiajiwangluo.bean.Total">
+		<id column="sid" property="sid" jdbcType="VARCHAR" />
+		<id column="days" property="days" jdbcType="DATE" />
+		<result column="xianshang" property="xianshang" jdbcType="DOUBLE" />
+		<result column="xianxia" property="xianxia" jdbcType="DOUBLE" />
+		<result column="totalSale" property="totalsale" jdbcType="DOUBLE" />
+		<result column="cost" property="cost" jdbcType="DOUBLE" />
+		<result column="profit" property="profit" jdbcType="DOUBLE" />
+		<result column="bank" property="bank" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value}
+									and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		sid, days, xianshang, xianxia, totalSale, cost, profit,
+		bank
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.xiajiwangluo.bean.TotalExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from total
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="com.xiajiwangluo.bean.TotalKey">
+		select
+		<include refid="Base_Column_List" />
+		from total
+		where sid = #{sid,jdbcType=VARCHAR}
+		and days =
+		#{days,jdbcType=DATE}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="com.xiajiwangluo.bean.TotalKey">
+		delete from total
+		where sid = #{sid,jdbcType=VARCHAR}
+		and days = #{days,jdbcType=DATE}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.xiajiwangluo.bean.TotalExample">
+		delete from total
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.xiajiwangluo.bean.Total">
+		insert into total (sid, days,
+		xianshang,
+		xianxia, totalSale, cost,
+		profit, bank)
+		values
+		(#{sid,jdbcType=VARCHAR}, #{days,jdbcType=DATE},
+		#{xianshang,jdbcType=DOUBLE},
+		#{xianxia,jdbcType=DOUBLE},
+		#{totalsale,jdbcType=DOUBLE}, #{cost,jdbcType=DOUBLE},
+		#{profit,jdbcType=DOUBLE}, #{bank,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.xiajiwangluo.bean.Total">
+		insert into total
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="days != null">
+				days,
+			</if>
+			<if test="xianshang != null">
+				xianshang,
+			</if>
+			<if test="xianxia != null">
+				xianxia,
+			</if>
+			<if test="totalsale != null">
+				totalSale,
+			</if>
+			<if test="cost != null">
+				cost,
+			</if>
+			<if test="profit != null">
+				profit,
+			</if>
+			<if test="bank != null">
+				bank,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="sid != null">
+				#{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="days != null">
+				#{days,jdbcType=DATE},
+			</if>
+			<if test="xianshang != null">
+				#{xianshang,jdbcType=DOUBLE},
+			</if>
+			<if test="xianxia != null">
+				#{xianxia,jdbcType=DOUBLE},
+			</if>
+			<if test="totalsale != null">
+				#{totalsale,jdbcType=DOUBLE},
+			</if>
+			<if test="cost != null">
+				#{cost,jdbcType=DOUBLE},
+			</if>
+			<if test="profit != null">
+				#{profit,jdbcType=DOUBLE},
+			</if>
+			<if test="bank != null">
+				#{bank,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.xiajiwangluo.bean.TotalExample"
+		resultType="java.lang.Integer">
+		select count(*) from total
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update total
+		<set>
+			<if test="record.sid != null">
+				sid = #{record.sid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.days != null">
+				days = #{record.days,jdbcType=DATE},
+			</if>
+			<if test="record.xianshang != null">
+				xianshang = #{record.xianshang,jdbcType=DOUBLE},
+			</if>
+			<if test="record.xianxia != null">
+				xianxia = #{record.xianxia,jdbcType=DOUBLE},
+			</if>
+			<if test="record.totalsale != null">
+				totalSale = #{record.totalsale,jdbcType=DOUBLE},
+			</if>
+			<if test="record.cost != null">
+				cost = #{record.cost,jdbcType=DOUBLE},
+			</if>
+			<if test="record.profit != null">
+				profit = #{record.profit,jdbcType=DOUBLE},
+			</if>
+			<if test="record.bank != null">
+				bank = #{record.bank,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update total
+		set sid = #{record.sid,jdbcType=VARCHAR},
+		days =
+		#{record.days,jdbcType=DATE},
+		xianshang =
+		#{record.xianshang,jdbcType=DOUBLE},
+		xianxia =
+		#{record.xianxia,jdbcType=DOUBLE},
+		totalSale =
+		#{record.totalsale,jdbcType=DOUBLE},
+		cost =
+		#{record.cost,jdbcType=DOUBLE},
+		profit =
+		#{record.profit,jdbcType=DOUBLE},
+		bank =
+		#{record.bank,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.xiajiwangluo.bean.Total">
+		update total
+		<set>
+			<if test="xianshang != null">
+				xianshang = #{xianshang,jdbcType=DOUBLE},
+			</if>
+			<if test="xianxia != null">
+				xianxia = #{xianxia,jdbcType=DOUBLE},
+			</if>
+			<if test="totalsale != null">
+				totalSale = #{totalsale,jdbcType=DOUBLE},
+			</if>
+			<if test="cost != null">
+				cost = #{cost,jdbcType=DOUBLE},
+			</if>
+			<if test="profit != null">
+				profit = #{profit,jdbcType=DOUBLE},
+			</if>
+			<if test="bank != null">
+				bank = #{bank,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where sid = #{sid,jdbcType=VARCHAR}
+		and days = #{days,jdbcType=DATE}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.xiajiwangluo.bean.Total">
+		update total
+		set
+		xianshang = #{xianshang,jdbcType=DOUBLE},
+		xianxia = #{xianxia,jdbcType=DOUBLE},
+		totalSale = #{totalsale,jdbcType=DOUBLE},
+		cost = #{cost,jdbcType=DOUBLE},
+		profit = #{profit,jdbcType=DOUBLE},
+		bank = #{bank,jdbcType=VARCHAR}
+		where sid = #{sid,jdbcType=VARCHAR}
+		and
+		days = #{days,jdbcType=DATE}
+	</update>
+
+</mapper>

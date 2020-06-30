@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>后台管理系统</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <!-- 页面meta /-->
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/jQueryUI/jquery-ui.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+  
+    <script src="../plugins/adminLTE/js/app.min.js"></script>
+    
+
+    
+    <script type="text/javascript">
+   
+		 function SetIFrameHeight(){
+		  	  var iframeid=document.getElementById("iframe"); //iframe id
+		  	  if (document.getElementById){
+		  		iframeid.height =document.documentElement.clientHeight;			   	   
+			  }
+		 }
+
+	</script>
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+
+    <script src = "../js/base.js"></script>
+    <script src="../js/service/loginService.js"></script>
+    <script src="../js/controller/baseController.js"></script>
+    <script src="../js/controller/indexController.js"></script>
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini" ng-app="xiajiwangluo" ng-controller="indexController" ng-init="showLoginName()">
+
+    <div class="wrapper">
+
+        <!-- 页面头部 -->
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>商家收银</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>商家收银</b>商家后台</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <!-- Messages: style can be found in dropdown.less-->
+
+
+
+                        <!-- User Account: style can be found in dropdown.less -->
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="../images/user2-160x160.jpg" class="user-image" alt="User Image">
+                                <span class="hidden-xs">{{loginName}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <img src="../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                                    <p>
+                                       {{loginName}}
+                                        <small>欢迎登陆商家收银</small>
+                                    </p>
+                                </li>
+                                
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    
+                                    <div class="pull-right">
+                                        <a href="../logout" class="btn btn-default btn-flat">注销</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- 页面头部 /-->
+
+        <!-- 导航侧栏 -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                <!-- Sidebar user panel -->
+                <div class="user-panel">
+                    <div class="pull-left image">
+                        <img src="../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                        <p> {{loginName}}</p>
+                        <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
+                    </div>
+                </div>
+                <ul class="sidebar-menu"  >
+                    <li class="header">菜单</li>
+                    <li id="admin-index"><a href="index.html"><i class="fa fa-dashboard"></i> <span>首页</span></a></li>
+
+				    <!-- 菜单 -->
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                            <span>数据管理</span>
+                            <span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+                        </a>
+                        <ul class="treeview-menu">
+
+                            <li id="admin-login">
+                                <a href="../xlsxdemo-master/table.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 信息导入
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+				    <li class="treeview">
+				        <a href="#">
+				            <i class="fa fa-folder"></i> 
+				            <span>查询中心</span>
+				            <span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+				        </a>
+				        <ul class="treeview-menu">
+
+                            <li id="admin-login">
+                                <a href="select_sale.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 销售查询
+                                </a>
+                            </li>
+                            <li id="admin-login">
+                                <a href="select_stock.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 库存查询
+                                </a>
+                            </li>
+                            <li id="admin-login">
+                                <a href="select_put.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 入库查询
+                                </a>
+                            </li>
+                            <li id="admin-login">
+                                <a href="select_returned.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 退货查询
+                                </a>
+                            </li>
+				        </ul>
+				    </li>
+                    <li class="treeview">
+				        <a href="#">
+				            <i class="fa fa-folder"></i>
+				            <span>数据分析</span>
+				            <span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+				        </a>
+				        <ul class="treeview-menu">
+
+                            <li id="admin-login">
+                                <a href="DA_list_red.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 销售红榜
+                                </a>
+                            </li>
+                            <li id="admin-login">
+                                <a href="DA_list_black.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 销售黑榜
+                                </a>
+                            </li>
+                            <li id="admin-login">
+                                <a href="DA_list_unsalable.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 滞销产品
+                                </a>
+                            </li>
+
+				        </ul>
+				    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                            <span>账号</span>
+                            <span class="pull-right-container">
+				       			<i class="fa fa-angle-left pull-right"></i>
+				   		 	</span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li id="admin-login">
+                                <a href="shop_sublist.html" target="iframe">
+                                    <i class="fa fa-circle-o"></i> 子账号
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+				    <!-- 菜单 /-->
+
+                </ul>
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+        <!-- 导航侧栏 /-->
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+			<iframe width="100%" id="iframe" name="iframe"	onload="SetIFrameHeight()" 
+					frameborder="0" src="home.html"></iframe>
+ 
+        </div>
+        <!-- 内容区域 /-->
+
+        <!-- 底部导航 -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>商家收银</b>
+            </div>
+            <strong>河南夏季网络有限公司</strong>
+        </footer>
+        <!-- 底部导航 /-->
+
+    </div>
+
+
+   
+</body>
+
+</html>

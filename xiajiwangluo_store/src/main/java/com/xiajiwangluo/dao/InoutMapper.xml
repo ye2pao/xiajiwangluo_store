@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiajiwangluo.dao.InoutMapper">
+	<resultMap id="BaseResultMap"
+		type="com.xiajiwangluo.bean.Inout">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="sname" property="sname" jdbcType="VARCHAR" />
+		<result column="sid" property="sid" jdbcType="VARCHAR" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="DOUBLE" />
+		<result column="norms" property="norms" jdbcType="VARCHAR" />
+		<result column="cls" property="cls" jdbcType="INTEGER" />
+		<result column="days" property="days" jdbcType="TIMESTAMP" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="price" property="price" jdbcType="DOUBLE" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		id, sname, sid, title, num, norms, cls, days, url, price
+	</sql>
+	<sql id="Base_Column_List2">
+		id, sid, title, norms, cls, days, url, SUM(price) AS price
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.xiajiwangluo.bean.InoutExample">
+		select
+		<if test="distinct">
+			distinct
+			<include refid="Base_Column_List2" />
+		</if>
+		<if test="!distinct">
+		<include refid="Base_Column_List" />
+		</if>
+		from `inout`
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from `inout`
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		delete from `inout`
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<delete id="deleteByExample"
+		parameterType="com.xiajiwangluo.bean.InoutExample">
+		delete from `inout`
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.xiajiwangluo.bean.Inout">
+		insert into `inout` (id, sname, sid,
+		title, num, norms, cls,
+		days, url, price)
+		values (#{id,jdbcType=INTEGER}, #{sname,jdbcType=VARCHAR},
+		#{sid,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR}, #{num,jdbcType=DOUBLE}, #{norms,jdbcType=VARCHAR},
+		#{cls,jdbcType=INTEGER},
+		#{days,jdbcType=DATE}, #{url,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.xiajiwangluo.bean.Inout">
+		insert into `inout`
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="sname != null">
+				sname,
+			</if>
+			<if test="sid != null">
+				sid,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="num != null">
+				num,
+			</if>
+			<if test="norms != null">
+				norms,
+			</if>
+			<if test="cls != null">
+				cls,
+			</if>
+			<if test="days != null">
+				days,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="price != null">
+				price,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="sname != null">
+				#{sname,jdbcType=VARCHAR},
+			</if>
+			<if test="sid != null">
+				#{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+
+			<if test="num != null">
+				#{num,jdbcType=DOUBLE},
+			</if>
+			<if test="norms != null">
+				#{norms,jdbcType=VARCHAR},
+			</if>
+			<if test="cls != null">
+				#{cls,jdbcType=INTEGER},
+			</if>
+			<if test="days != null">
+				#{days,jdbcType=DATE},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				#{price,jdbcType=DOUBLE},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample"
+		parameterType="com.xiajiwangluo.bean.InoutExample"
+		resultType="java.lang.Integer">
+		select count(*) from `inout`
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update `inout`
+		<set>
+			<if test="record.id != null">
+				id = #{record.id,jdbcType=INTEGER},
+			</if>
+			<if test="record.sname != null">
+				sname = #{record.sname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.sid != null">
+				sid = #{record.sid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.title != null">
+				title = #{record.title,jdbcType=VARCHAR},
+			</if>
+			<if test="record.num != null">
+				num = #{record.num,jdbcType=DOUBLE},
+			</if>
+			<if test="record.norms != null">
+				norms = #{record.norms,jdbcType=VARCHAR},
+			</if>
+			<if test="record.cls != null">
+				cls = #{record.cls,jdbcType=INTEGER},
+			</if>
+			<if test="record.days != null">
+				days = #{record.days,jdbcType=DATE},
+			</if>
+			<if test="record.url != null">
+				url = #{record.url,jdbcType=VARCHAR},
+			</if>
+			<if test="record.price != null">
+				price = #{record.price,jdbcType=DOUBLE},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update `inout`
+		set id = #{record.id,jdbcType=INTEGER},
+		sname = #{record.sname,jdbcType=VARCHAR},
+		sid = #{record.sid,jdbcType=VARCHAR},
+		title = #{record.title,jdbcType=VARCHAR},
+		num = #{record.num,jdbcType=DOUBLE},
+		norms = #{record.norms,jdbcType=VARCHAR},
+		cls = #{record.cls,jdbcType=INTEGER},
+		days = #{record.days,jdbcType=DATE},
+		url = #{record.url,jdbcType=VARCHAR},
+		price = #{record.price,jdbcType=DOUBLE}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.xiajiwangluo.bean.Inout">
+		update `inout`
+		<set>
+			<if test="sname != null">
+				sname = #{sname,jdbcType=VARCHAR},
+			</if>
+			<if test="sid != null">
+				sid = #{sid,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				num = #{num,jdbcType=DOUBLE},
+			</if>
+			<if test="norms != null">
+				norms = #{norms,jdbcType=VARCHAR},
+			</if>
+			<if test="cls != null">
+				cls = #{cls,jdbcType=INTEGER},
+			</if>
+			<if test="days != null">
+				days = #{days,jdbcType=DATE},
+			</if>
+			<if test="url != null">
+				url = #{url,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=DOUBLE},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.xiajiwangluo.bean.Inout">
+		update `inout`
+		set sname = #{sname,jdbcType=VARCHAR},
+		sid = #{sid,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		num = #{num,jdbcType=DOUBLE},
+		norms = #{norms,jdbcType=VARCHAR},
+		cls = #{cls,jdbcType=INTEGER},
+		days = #{days,jdbcType=DATE},
+		url = #{url,jdbcType=VARCHAR},
+		price = #{price,jdbcType=DOUBLE}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectSum" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.InoutExample">
+		SELECT
+		sname ,SUM(price) AS price, days
+		FROM `inout`
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		GROUP BY sname,days
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<select id="tuikuanTotal" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.InoutExample">
+		SELECT
+		SUM(price) AS price, days
+		FROM `inout`
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		GROUP BY days
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+
+</mapper>

@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiajiwangluo.dao.ShopMapper" >
+  <resultMap id="BaseResultMap" type="com.xiajiwangluo.bean.Shop" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="addr" property="addr" jdbcType="VARCHAR" />
+    <result column="faren" property="faren" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="card" property="card" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+    <result column="days" property="days" jdbcType="DATE" />
+    <result column="man" property="man" jdbcType="DOUBLE" />
+    <result column="jian" property="jian" jdbcType="DOUBLE" />
+    <result column="zk" property="zk" jdbcType="DOUBLE" />
+    <result column="photo" property="photo" jdbcType="VARCHAR" />
+    <result column="codes" property="codes" jdbcType="VARCHAR" />
+    <result column="bank" property="bank" jdbcType="VARCHAR" />
+    <result column="range" property="range" jdbcType="VARCHAR" />
+    <result column="openID" property="openid" jdbcType="VARCHAR" />
+    <result column="x" property="x" jdbcType="VARCHAR" />
+    <result column="y" property="y" jdbcType="VARCHAR" />
+    <result column="hdbegin" property="hdbegin" jdbcType="DATE" />
+    <result column="hdend" property="hdend" jdbcType="DATE" />
+    <result column="hdnames" property="hdnames" jdbcType="VARCHAR" />
+    <result column="license" property="license" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title, addr, faren, tel, card, username, pwd, days, man, jian, zk, photo, codes,
+    bank, `range`, openID, x, y, hdbegin, hdend, hdnames, license
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.xiajiwangluo.bean.ShopExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from shop
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xiajiwangluo.bean.ShopExample" >
+    delete from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xiajiwangluo.bean.Shop" >
+    insert into shop (id, title, addr, 
+      faren, tel, card, username, 
+      pwd, days, man, jian,
+      zk, photo, codes, bank,
+      `range`, openID, x, y,
+      hdbegin, hdend, hdnames,
+      license)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{addr,jdbcType=VARCHAR}, 
+      #{faren,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{card,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{pwd,jdbcType=VARCHAR}, #{days,jdbcType=DATE}, #{man,jdbcType=DOUBLE}, #{jian,jdbcType=DOUBLE},
+      #{zk,jdbcType=DOUBLE}, #{photo,jdbcType=VARCHAR}, #{codes,jdbcType=VARCHAR}, #{bank,jdbcType=VARCHAR},
+      #{range,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{x,jdbcType=VARCHAR}, #{y,jdbcType=VARCHAR},
+      #{hdbegin,jdbcType=DATE}, #{hdend,jdbcType=DATE}, #{hdnames,jdbcType=VARCHAR},
+      #{license,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiajiwangluo.bean.Shop" >
+    insert into shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="addr != null" >
+        addr,
+      </if>
+      <if test="faren != null" >
+        faren,
+      </if>
+      <if test="tel != null" >
+        tel,
+      </if>
+      <if test="card != null" >
+        card,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="pwd != null" >
+        pwd,
+      </if>
+      <if test="days != null" >
+        days,
+      </if>
+      <if test="man != null" >
+        man,
+      </if>
+      <if test="jian != null" >
+        jian,
+      </if>
+      <if test="zk != null" >
+        zk,
+      </if>
+      <if test="photo != null" >
+        photo,
+      </if>
+      <if test="codes != null" >
+        codes,
+      </if>
+      <if test="bank != null" >
+        bank,
+      </if>
+      <if test="range != null" >
+        `range`,
+      </if>
+      <if test="openid != null" >
+        openID,
+      </if>
+      <if test="x != null" >
+        x,
+      </if>
+      <if test="y != null" >
+        y,
+      </if>
+      <if test="hdbegin != null" >
+        hdbegin,
+      </if>
+      <if test="hdend != null" >
+        hdend,
+      </if>
+      <if test="hdnames != null" >
+        hdnames,
+      </if>
+      <if test="license != null" >
+        license,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="faren != null" >
+        #{faren,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null" >
+        #{days,jdbcType=DATE},
+      </if>
+      <if test="man != null" >
+        #{man,jdbcType=DOUBLE},
+      </if>
+      <if test="jian != null" >
+        #{jian,jdbcType=DOUBLE},
+      </if>
+      <if test="zk != null" >
+        #{zk,jdbcType=DOUBLE},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="codes != null" >
+        #{codes,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null" >
+        #{range,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="hdbegin != null" >
+        #{hdbegin,jdbcType=DATE},
+      </if>
+      <if test="hdend != null" >
+        #{hdend,jdbcType=DATE},
+      </if>
+      <if test="hdnames != null" >
+        #{hdnames,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null" >
+        #{license,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xiajiwangluo.bean.ShopExample" resultType="java.lang.Integer" >
+    select count(*) from shop
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update shop
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addr != null" >
+        addr = #{record.addr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faren != null" >
+        faren = #{record.faren,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tel != null" >
+        tel = #{record.tel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.card != null" >
+        card = #{record.card,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pwd != null" >
+        pwd = #{record.pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.days != null" >
+        days = #{record.days,jdbcType=DATE},
+      </if>
+      <if test="record.man != null" >
+        man = #{record.man,jdbcType=DOUBLE},
+      </if>
+      <if test="record.jian != null" >
+        jian = #{record.jian,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zk != null" >
+        zk = #{record.zk,jdbcType=DOUBLE},
+      </if>
+      <if test="record.photo != null" >
+        photo = #{record.photo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.codes != null" >
+        codes = #{record.codes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank != null" >
+        bank = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.range != null" >
+        `range` = #{record.range,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openid != null" >
+        openID = #{record.openid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.x != null" >
+        x = #{record.x,jdbcType=VARCHAR},
+      </if>
+      <if test="record.y != null" >
+        y = #{record.y,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hdbegin != null" >
+        hdbegin = #{record.hdbegin,jdbcType=DATE},
+      </if>
+      <if test="record.hdend != null" >
+        hdend = #{record.hdend,jdbcType=DATE},
+      </if>
+      <if test="record.hdnames != null" >
+        hdnames = #{record.hdnames,jdbcType=VARCHAR},
+      </if>
+      <if test="record.license != null" >
+        license = #{record.license,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update shop
+    set id = #{record.id,jdbcType=VARCHAR},
+      title = #{record.title,jdbcType=VARCHAR},
+      addr = #{record.addr,jdbcType=VARCHAR},
+      faren = #{record.faren,jdbcType=VARCHAR},
+      tel = #{record.tel,jdbcType=VARCHAR},
+      card = #{record.card,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      pwd = #{record.pwd,jdbcType=VARCHAR},
+      days = #{record.days,jdbcType=DATE},
+      man = #{record.man,jdbcType=DOUBLE},
+      jian = #{record.jian,jdbcType=DOUBLE},
+      zk = #{record.zk,jdbcType=DOUBLE},
+      photo = #{record.photo,jdbcType=VARCHAR},
+      codes = #{record.codes,jdbcType=VARCHAR},
+      bank = #{record.bank,jdbcType=VARCHAR},
+      `range` = #{record.range,jdbcType=VARCHAR},
+      openID = #{record.openid,jdbcType=VARCHAR},
+      x = #{record.x,jdbcType=VARCHAR},
+      y = #{record.y,jdbcType=VARCHAR},
+      hdbegin = #{record.hdbegin,jdbcType=DATE},
+      hdend = #{record.hdend,jdbcType=DATE},
+      hdnames = #{record.hdnames,jdbcType=VARCHAR},
+      license = #{record.license,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xiajiwangluo.bean.Shop" >
+    update shop
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="addr != null" >
+        addr = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="faren != null" >
+        faren = #{faren,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="card != null" >
+        card = #{card,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="pwd != null" >
+        pwd = #{pwd,jdbcType=VARCHAR},
+      </if>
+      <if test="days != null" >
+        days = #{days,jdbcType=DATE},
+      </if>
+      <if test="man != null" >
+        man = #{man,jdbcType=DOUBLE},
+      </if>
+      <if test="jian != null" >
+        jian = #{jian,jdbcType=DOUBLE},
+      </if>
+      <if test="zk != null" >
+        zk = #{zk,jdbcType=DOUBLE},
+      </if>
+      <if test="photo != null" >
+        photo = #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="codes != null" >
+        codes = #{codes,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null" >
+        bank = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="range != null" >
+        `range` = #{range,jdbcType=VARCHAR},
+      </if>
+      <if test="openid != null" >
+        openID = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="x != null" >
+        x = #{x,jdbcType=VARCHAR},
+      </if>
+      <if test="y != null" >
+        y = #{y,jdbcType=VARCHAR},
+      </if>
+      <if test="hdbegin != null" >
+        hdbegin = #{hdbegin,jdbcType=DATE},
+      </if>
+      <if test="hdend != null" >
+        hdend = #{hdend,jdbcType=DATE},
+      </if>
+      <if test="hdnames != null" >
+        hdnames = #{hdnames,jdbcType=VARCHAR},
+      </if>
+      <if test="license != null" >
+        license = #{license,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xiajiwangluo.bean.Shop" >
+    update shop
+    set title = #{title,jdbcType=VARCHAR},
+      addr = #{addr,jdbcType=VARCHAR},
+      faren = #{faren,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      card = #{card,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      pwd = #{pwd,jdbcType=VARCHAR},
+      days = #{days,jdbcType=DATE},
+      man = #{man,jdbcType=DOUBLE},
+      jian = #{jian,jdbcType=DOUBLE},
+      zk = #{zk,jdbcType=DOUBLE},
+      photo = #{photo,jdbcType=VARCHAR},
+      codes = #{codes,jdbcType=VARCHAR},
+      bank = #{bank,jdbcType=VARCHAR},
+      `range` = #{range,jdbcType=VARCHAR},
+      openID = #{openid,jdbcType=VARCHAR},
+      x = #{x,jdbcType=VARCHAR},
+      y = #{y,jdbcType=VARCHAR},
+      hdbegin = #{hdbegin,jdbcType=DATE},
+      hdend = #{hdend,jdbcType=DATE},
+      hdnames = #{hdnames,jdbcType=VARCHAR},
+      license = #{license,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+   <select id="login" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from shop
+		where
+		username = #{0,jdbcType=VARCHAR} and pwd = #{1};
+	</select>
+
+</mapper>
